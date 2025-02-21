@@ -1,0 +1,50 @@
+# Problem: A. Beautiful Matrix - https://codeforces.com/problemset/problem/263/A
+
+using namespace std;
+#include <bits/stdc++.h>
+ 
+#define fast                      \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0);                   \
+    cout.tie(0);
+#define ll long long
+#define int long long
+#define yes cout << "YES\n"
+#define no cout << "NO\n"
+#define For(j) for (int i = 0; i < j; i++)
+#define endl '\n'
+#define dd(b, a) cout << fixed << setprecision(b) << a << endl;
+#define all(s) s.begin(), s.end()
+
+void solve() {
+ 
+    int arr[5][5];
+    int q,w;
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            cin>>arr[i][j];
+            if(arr[i][j]==1)q=i,w=j;
+        }
+    }
+    
+    cout<< abs(2-q)+abs(2-w);
+}
+signed main()
+{
+    // #ifndef ONLINE_JUDGE
+    //     freopen("input.txt", "r", stdin);
+    //     freopen("output.txt", "w", stdout);
+    // #endif
+    fast;
+
+    int t = 1;
+    // cin >> t;
+    while (t--)
+    {
+        solve();
+        if (t)
+            cout << endl;
+    }
+}
