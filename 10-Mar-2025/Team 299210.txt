@@ -1,0 +1,110 @@
+# Problem: Team - https://codeforces.com/contest/231/problem/A
+
+using namespace std;
+#include <bits/stdc++.h>
+#define fast                      \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0);                   \
+    cout.tie(0);
+typedef vector<int> vi;
+typedef vector<long long> vl;
+#define int long long
+#define yes cout << "Yes\n"
+#define no cout << "No\n"
+#define For(i) for (int j = 0; j < i; j++)
+#define endl '\n'
+#define dd(b, a) cout << fixed << setprecision(b) << a << endl;
+#define all(s) s.begin(), s.end()
+#define MOD 1000000007
+int gcd(int x, int y)
+{
+    while (y != 0)
+    {
+        x %= y;
+        swap(x, y);
+    }
+    return x;
+}
+int g(int x, int y)
+{
+    return x / gcd(x, y) * y;
+}
+ 
+int binary(int x)
+{
+    int binary = 0;
+    while (x)
+    {
+        binary = binary * 10 + (x % 2);
+        x /= 2;
+    }
+    return binary;
+}
+ 
+bool isprime(int x)
+{
+    if (x == 1)
+        return false;
+    for (int i = 2; i * i <= x; i++)
+    {
+        if (x % i == 0)
+            return false;
+    }
+    return true;
+}
+ 
+vi num;
+void divisor(int x)
+{
+ 
+    for (int i = 2; i * i <= x; i++)
+    {
+        while (x % i == 0)
+        {
+            num.push_back(i);
+            x /= i;
+        }
+    }
+    if (x > 1)
+        num.push_back(x);
+}
+/*---------------------------------------------------*/
+struct a
+{
+    int sum,a,m,s,e;
+    string s1;
+};
+bool comp(a x,a y){
+    if(x.sum == y.sum)
+    return x.s1<y.s1;
+    return x.sum > y.sum;
+}
+ 
+void solve() {
+    int x,count=0;
+    cin>>x;
+    while (x--)
+    {
+        int a,b,c;
+        cin>>a>>b>>c;
+        int sum = a+b+c;
+        if(sum>=2)count++;
+    }
+    
+    cout<<count;
+}
+ 
+ 
+signed main()
+{
+    fast;
+    int t = 1;
+    // cin >> t;
+    while (t--)
+    {
+        solve();
+        // if (t)
+            // cout << endl;
+    }
+    
+}
