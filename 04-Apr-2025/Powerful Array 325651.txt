@@ -1,0 +1,125 @@
+# Problem: Powerful Array - https://codeforces.com/problemset/problem/86/D
+
+#include <bits/stdc++.h>
+
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+using namespace std;
+
+template <typename T>
+using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+
+void init()
+{
+    cin.tie(0);
+    cin.sync_with_stdio(0);
+}
+
+const int max_ = 1e6 + 5;
+vector<int> v;
+long long fre[max_];
+long long ans = 0;
+void remove(int idx)
+{
+
+    auto &it = fre[v[idx]];
+    ans -= it * it * v[idx];
+    it--;
+    ans += it * it * v[idx];
+}
+void add(int idx){
+    auto &it = fre[v[idx]];
+    ans -= it * it * v[idx];
+    it++;
+    ans += it * it * v[idx];
+}
+
+long long get_answer(){
+    return ans;
+} 
+
+const int block_size = 450;
+
+struct Query
+{
+    int l, r, idx;
+    bool operator<(const Query &o) const
+    {
+        if (l / block_size == o.l / block_size)
+        {
+            if ((l / block_size) % 2 == 0)
+                return r < o.r;
+            else
+                return r > o.r;
+        }
+        else
+        {
+            return l < o.l;
+        }
+    }
+};
+
+vector<long long> mo_s_algorithm(vector<Query> queries)
+{
+    vector<long long> answers(queries.size());
+    sort(queries.begin(), queries.end());
+
+    int cur_l = 0;
+    int cur_r = -1;
+    for (Query q : queries)
+    {
+        while (cur_l > q.l)
+        {
+            cur_l--;
+            add(cur_l);
+        }
+        while (cur_r < q.r)
+        {
+            cur_r++;
+            add(cur_r);
+        }
+        while (cur_l < q.l)
+        {
+            remove(cur_l);
+            cur_l++;
+        }
+        while (cur_r > q.r)
+        {
+            remove(cur_r);
+            cur_r--;
+        }
+        answers[q.idx] = get_answer();
+    }
+    return answers;
+}
+int main()
+{
+    init();
+    // freopen("differences.in", "r", stdin);
+    // freopen("mootube.out", "w", stdout);
+    memset(fre, 0, sizeof fre);
+    int n, m;
+    cin >> n >> m;
+
+    v = vector<int>(n);
+    for (int i = 0; i < n; i++){
+        cin >> v[i];
+        if(v[i] >= max_)
+            v[i] = max_ - 1;
+    }
+
+    vector<Query> q(m);
+    for (int i = 0; i < m; i++)
+    {
+        cin >> q[i].l >> q[i].r;
+        q[i].idx = i;
+        q[i].l--;
+        q[i].r--;
+    }
+
+    vector<long long> ans = mo_s_algorithm(q);
+    for (auto it : ans)
+        cout << it << "\n";
+    return 0;
+}
