@@ -1,0 +1,82 @@
+# Problem: Interesting drink - https://codeforces.com/problemset/problem/706/B/
+
+using namespace std;
+#include <bits/stdc++.h>
+
+#define fast                      \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0);                   \
+    cout.tie(0);
+typedef vector<int> vi;
+typedef vector<long long> vl;
+#define int long long
+#define yes cout << "YES\n"
+#define no cout << "NO\n"
+#define For(i) for (int j = 0; j < i; j++)
+#define endl '\n'
+#define dd(b, a) cout << fixed << setprecision(b) << a << endl;
+#define all(s) s.begin(), s.end()
+int x, k;
+bool p(int m)
+{
+    int sum = 0;
+    int t = 1;
+    while (sum < x)
+    {
+        if (m / t == 0)
+            break;
+        sum += m / t;
+        t *= k;
+    }
+    return sum >= x;
+}
+void solve()
+{
+
+    int x;
+    cin >> x;
+    int arr[x];
+    for (int i = 0; i < x; i++)
+    {
+        cin >> arr[i];
+    }
+    sort(arr,arr+x);
+    int q;
+    cin >> q;
+    while (q--)
+    {
+        int w;
+        cin>>w;
+        int l = 0, r = x - 1, ans = -1;
+        while (l <= r)
+        {
+            int mid = (l + r) / 2;
+            if (arr[mid] <= w)
+            {
+                ans = mid;
+                l = mid + 1;
+            }
+            else
+            {
+                r = mid - 1;
+            }
+        }
+        cout << ans + 1<<endl;
+    }
+}
+signed main()
+{
+    // #ifndef ONLINE_JUDGE
+    //     freopen("input.txt", "r", stdin);
+    //     freopen("output.txt", "w", stdout);
+    // #endif
+    fast;
+    int t = 1;
+    // cin >> t;
+    while (t--)
+    {
+        solve();
+        if (t)
+            cout << endl;
+    }
+}
