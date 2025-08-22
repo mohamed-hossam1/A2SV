@@ -1,0 +1,94 @@
+# Problem: Cirno's Perfect Bitmasks Classroom - https://codeforces.com/problemset/problem/1688/A
+
+using namespace std;
+#include <bits/stdc++.h>
+
+#define fast                      \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0);                   \
+    cout.tie(0);
+#define ll long long
+#define int long long
+#define yes cout << "YES\n"
+#define no cout << "NO\n"
+#define For(j) for (int i = 0; i < j; i++)
+#define endl '\n'
+#define dd(b, a) cout << fixed << setprecision(b) << a << endl;
+#define all(s) s.begin(), s.end()
+
+bool Knowbit(ll n,int i)
+{
+    return (n>>i)&1;
+}
+ll Setbit(ll n,int i)
+{
+    return n|(1<<i);
+}
+ll Resetbit(ll n,int i)
+{
+    return n&(~(1<<i));
+}
+ll flip(ll n,int i)
+{
+    return n^(1<<i);
+}
+bool isPowerOfTwo(ll n)
+{
+    if(n==0)return 0;
+    return !(n&(n-1));
+}
+int countFoOnes(int n){
+    return __builtin_popcount(n);
+}
+
+int sum(int t,int x){
+    while (t<=x)
+    {
+        t*=2;
+    }
+    t/=2;
+    bitset<32> k = x-t;
+    return k.count();
+}
+
+void solve()
+{
+    int x;
+    cin>>x;
+    bitset<32> k =x;
+    int i=0;
+    while (true)
+    {
+        if(k[i]==1)break;
+        i++;
+    }
+    if(i==0){
+        if(k.count()==1)cout<<3<<endl;
+        else cout<<1<<endl;
+        return;
+    }
+    int h = 1<<(i);
+
+    if(k.count()==1){
+        h++;
+    }
+
+    cout<<h<<endl;    
+}
+signed main()
+{
+    // #ifndef ONLINE_JUDGE
+    //     freopen("input.txt", "r", stdin);
+    //     freopen("output.txt", "w", stdout);
+    // #endif
+    fast;
+
+    int t = 1;
+    cin >> t;
+    while (t--)
+    {
+        solve();
+        // if (t)
+        //     cout << endl;
+    }
+}
