@@ -1,0 +1,46 @@
+# Problem: Complicated GCD - https://codeforces.com/contest/664/problem/A
+
+using namespace std;
+#include <bits/stdc++.h>
+ 
+#define fast                      \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0);                   \
+    cout.tie(0);
+#define ll long long
+#define int long long
+#define yes cout << "YES\n"
+#define no cout << "NO\n"
+#define For(j) for (int i = 0; i < j; i++)
+#define endl '\n'
+#define dd(b, a) cout << fixed << setprecision(b) << a << endl;
+#define all(s) s.begin(), s.end()
+int gcd(int a,int b){ 
+    if(b>a) swap(a,b);
+    if(b==0) return a;
+    return gcd(a%b,b);
+}
+void solve()
+{
+    string s1,s2;
+    cin>>s1>>s2;
+    if(s1==s2)cout<<s1;
+    else cout<<1;
+}
+signed main()
+{
+    // #ifndef ONLINE_JUDGE
+    //     freopen("input.txt", "r", stdin);
+    //     freopen("output.txt", "w", stdout);
+    // #endif
+    fast;
+ 
+    int t = 1;
+    // cin >> t;
+    while (t--)
+    {
+        solve();
+        if (t)
+            cout << endl;
+    }
+}
