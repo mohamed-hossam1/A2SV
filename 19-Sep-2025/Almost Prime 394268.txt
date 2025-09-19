@@ -1,0 +1,79 @@
+# Problem: Almost Prime - https://codeforces.com/problemset/problem/26/A
+
+using namespace std;
+#include <bits/stdc++.h>
+ 
+#define fast                      \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0);                   \
+    cout.tie(0);
+#define ll long long
+#define int long long
+#define yes cout << "YES\n"
+#define no cout << "NO\n"
+#define For(j) for (int i = 0; i < j; i++)
+#define endl '\n'
+#define dd(b, a) cout << fixed << setprecision(b) << a << endl;
+#define all(s) s.begin(), s.end()
+
+bool p(int n){
+    set<int> s;
+    for (int i = 2; i*i <= n; i++)
+    {
+        while (n%i==0){
+            s.insert(i);
+            n/=i;
+        }
+    }
+    if(n>1)s.insert(n);
+    return s.size()==2;
+}
+vector<bool> linearSieve(int N)
+{
+    vector<bool>isPrime(N,1);vector<int>primes;
+    isPrime[0]=isPrime[1]=0;
+    for(ll i=2;i<N;i++)
+    {
+        if(isPrime[i]) primes.push_back(i);
+        for(auto it:primes)
+        {
+            if(i*it>=N) break;
+            isPrime[i*it]=0;
+            if(i%it==0) break;
+        }
+    }
+    return isPrime;
+}
+
+void solve()
+{
+    int n;
+    cin>>n;
+    vector<bool> q = linearSieve(n+1);
+    int sum=0;
+    for (int i = 1; i <= n; i++)
+    {
+        if(!q[i])
+        sum+=p(i);
+    }
+    cout<<sum;
+    
+}   
+    
+signed main()
+{
+    // #ifndef ONLINE_JUDGE
+    //     freopen("input.txt", "r", stdin);
+    //     freopen("output.txt", "w", stdout);
+    // #endif
+    fast;
+ 
+    int t = 1;
+    // cin >> t;
+    while (t--)
+    {
+        solve();
+        if (t)
+            cout << endl;
+    }
+}
